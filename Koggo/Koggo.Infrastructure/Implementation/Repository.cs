@@ -11,7 +11,7 @@ public class Repository<T> : IRepository<T> where T : class, IBaseModel
     private readonly DbSet<T> _table;
     private readonly IUnitOfWork _unitOfWork;
     private readonly KoggoDbContext _context;
-
+    
     public Repository(KoggoDbContext context)
     {
         _context = context;
