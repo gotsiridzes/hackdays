@@ -1,0 +1,178 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start; /* Changed from space-between to flex-start */
+    align-items: center;
+}
+
+nav li {
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    display: block;
+    color: #333;
+    text-align: center;
+    padding: 20px 30px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #f0f0f0;
+}
+
+nav a.active {
+    background-color: #e0e0e0;
+}
+
+#content {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.service-item {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+}
+
+.service-item img {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+    display: block;
+    margin-bottom: 10px;
+}
+.service-image img {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+    display: block;
+    margin-right: 20px;
+}
+
+.service-info {
+    flex-grow: 1;
+}
+
+.service-name,
+.service-description,
+.service-price {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+.service-name {
+    font-size: 1.25em;
+    margin-bottom: 5px;
+}
+
+.service-price {
+    font-size: 1.15em;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.see-more {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.see-more:hover {
+    background-color: #d0d0d0;
+}
+
+
+.auth-links {
+    margin-left: auto;  /* This will push login/register links to the right */
+}
+
+.auth-link + .auth-link {
+    margin-left: 20px;  /* This will create a 20px gap between the login and register links */
+}
+
+.auth-link a {
+    padding: 10px 20px;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.auth-link a:hover {
+    background-color: #d0d0d0;
+}
+
+footer {
+    background-color: #ffffff;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
+/* ...existing styles... */
+
+#pagination-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#pagination-controls button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#pagination-controls button:hover {
+    background-color: #d0d0d0;
+}
+
+#pagination-controls button:disabled {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+#pagination-controls #page-num {
+    margin: 0 10px;
+    font-size: 1em;
+}
