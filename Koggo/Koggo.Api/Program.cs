@@ -1,4 +1,7 @@
+using Koggo.Domain.Models;
 using Koggo.Infrastructure;
+using Koggo.Infrastructure.Implementation;
+using Koggo.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +14,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<KoggoDbContext>(
        options => options.UseSqlServer("@\"Server=(localdb)\\mssqllocaldb;Database=Test; trusted_connection=true;\""));
+
+builder.Services.AddScoped<IRepository<User>, Repository<User>>();
+builder.Services.AddScoped<IRepository<Reservation>, Repository<Reservation>>();
+builder.Services.AddScoped<IRepository<Service>, Repository<Service>>();
+builder.Services.AddScoped<IRepository<UserService>, Repository<UserService>>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

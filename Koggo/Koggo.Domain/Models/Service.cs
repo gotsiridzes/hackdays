@@ -1,6 +1,8 @@
+using Koggo.Domain.Interfaces;
+
 namespace Koggo.Domain.Models;
 
-public class Service
+public class Service : IBaseModel
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;

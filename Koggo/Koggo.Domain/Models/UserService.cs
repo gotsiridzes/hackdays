@@ -1,7 +1,9 @@
 
+using Koggo.Domain.Interfaces;
+
 namespace Koggo.Domain.Models;
 
-public class UserService
+public class UserService : IBaseModel
 {
     public int Id { get; set; }
     public int UserId { get; set; }

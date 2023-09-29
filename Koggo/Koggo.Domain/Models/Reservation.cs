@@ -1,7 +1,9 @@
 
+using Koggo.Domain.Interfaces;
+
 namespace Koggo.Domain.Models;
 
-public class Reservation
+public class Reservation : IBaseModel
 {
     public int Id { get; set; }
     public int UserServiceId { get; set; }

@@ -21,8 +21,4 @@
       <ProjectReference Include="..\Koggo.Domain\Koggo.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="EntityConfiguration\" />
-    </ItemGroup>
-
 </Project>
