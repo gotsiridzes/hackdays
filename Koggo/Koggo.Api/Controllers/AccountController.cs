@@ -2,6 +2,7 @@ using Koggo.Application.Helpers;
 using Koggo.Application.Services.Interface;
 using Koggo.Domain.Models;
 using Koggo.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,7 +33,8 @@ public class AccountController : ControllerBase
 
         return _jwtTokenService.GetToken(user);
     }
-
+    
+    [Authorize]
     [HttpPost("AddUser")]
     public async Task AddAccountAsync(string username, string password)
     {
