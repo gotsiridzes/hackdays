@@ -1,4 +1,3 @@
-using Koggo.Domain.Records;
 
 namespace Koggo.Domain.Models;
 
@@ -7,7 +6,7 @@ public class UserService
     public int Id { get; set; }
     public int UserId { get; set; }
     public int ServiceId { get; set; }
-    public Money Price { get; set; } = null!;
-    public TimeOnly AvailableStartHour { get; set; }
-    public TimeOnly AvailableEndHour { get; set; }
+    public decimal Price { get; set; }
+    public DateTime AvailableStartHour { get; set; }
+    public DateTime AvailableEndHour { get; set; }
 }

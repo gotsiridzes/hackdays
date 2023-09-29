@@ -1,4 +1,3 @@
-using Koggo.Domain.Records;
 
 namespace Koggo.Domain.Models;
 
@@ -15,7 +14,7 @@ public class Reservation
     public DateTime CreationDate { get; set; }
     public string? Location { get; set; }
     public string? Comment { get; set; }
-    public Money TotalPrice { get; set; } = null!;
+    public decimal TotalPrice { get; set; }
     public Guid CorrelationId { get; set; }
 }
 
