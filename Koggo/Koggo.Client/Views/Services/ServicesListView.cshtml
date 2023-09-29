@@ -1,0 +1,95 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+@model IEnumerable<Koggo.Client.Models.ModelTemplate1>
+
+@{
+    ViewData["Title"] = "სერვისების სია";
+}
+
+<style>
+    .larger-td {
+        width: 20%; /* Adjust the width as needed */
+        height: 10%; /* Adjust the height as needed */
+    }
+
+    .green-text {
+        color: green;
+    }
+
+    .smooth-rectangle {
+        border-radius: 15%; /* Make the image round */
+        max-width: 100%; /* Adjust the maximum width as needed */
+        height: auto;
+    }
+
+    /* Apply custom font families and adjust font size for all text elements */
+    body {
+        font-family: "Arial", sans-serif; /* Change to your preferred font family */
+        font-size: 16px; /* Adjust the font size as needed */
+    }
+
+    h3, th, td, p, .btn {
+        font-family: "Georgia", serif; /* Change to your preferred font family */
+        font-size: 18px; /* Adjust the font size as needed */
+    }
+</style>
+
+<div class="container">
+    <div class="mb-3">
+        <form id="filterForm">
+            <div class="row">
+                <div class="col-md-3 mb-2">
+                    <select class="form-control" id="categoryFilterSelect" placeholder="კატეგორია">
+                        <option value="">ტრაქტორი</option>
+                        <option value="">ევაკუატორი</option>
+                        <option value="">ამწე</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-2">
+                    <input type="text" class="form-control" id="locationFilterInput" placeholder="მდებარეობა">
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-secondary btn-block">
+                        <i class="fas fa-search"></i> ფილტრი
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center larger-td">სერვისი</th>
+                    <th class="text-center">აღწერა</th>
+                    <th class="text-center">ფასი</th>
+                    <th class="text-center">მომწოდებელი</th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <img src="data:image/png;base64, @item.Data" alt="Image Description" class="img-fluid smooth-rectangle">
+                        </td>
+                        <td class="align-middle text-center">
+                            <p>@item.Description</p>
+                        </td>
+                        <td class="text-center align-middle green-text">
+                            <span class="badge badge-success green-text">@item.Price₾</span>
+                        </td>
+                        <td class="align-middle text-center">
+                            <p>@item.OwnerName</p>
+                        </td>
+                        <td class="text-center align-middle">
+                            @Html.ActionLink("დაჯავშნა", "Details", new { /* id = item.PrimaryKey */ }, new { @class = "btn btn-primary btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
