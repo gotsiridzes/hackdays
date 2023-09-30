@@ -66,7 +66,7 @@ public class HomeController : ControllerBase
     public IActionResult LogOut()
     {
         Response.RemoveJwtToken();
-        return RedirectToRoute("/UserServices");
+        return RedirectToAction("LogIn");
     }
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
