@@ -65,12 +65,7 @@ public class UserServiceRepository : IUserServiceRepository
             .GetValues(typeof(ServiceType))
             .Cast<ServiceType>()
             .ToList();
-	public async Task<List<ServiceType>> ListServiceTypesAsync() =>
-	    Enum
-		    .GetValues(typeof(ServiceType))
-		    .Cast<ServiceType>()
-		    .ToList();
-
+    
 	public Task<List<UserService>> GetUserServiceByIdsAndIncludes(int[] ids)
 	{
 		return _context.UserServices
