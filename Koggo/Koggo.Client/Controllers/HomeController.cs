@@ -45,7 +45,7 @@ public class HomeController : ControllerBase
 
         var token = _jwtTokenService.GetToken(user);
         Response.AddJwtToken(token);
-        return RedirectToRoute("/UserServices");
+        return RedirectToAction("Index", "UserServices");
     }
     
     [HttpGet("Login")]

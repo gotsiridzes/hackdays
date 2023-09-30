@@ -176,15 +176,8 @@ public class Repository<T> : IRepository<T> where T : class, IBaseModel
 
     public async Task Add(T obj, CancellationToken cancellationToken)
     {
-        try
-        {
-            _table.Add(obj);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Error during saving object {nameof(T)}. Exception: {ex.Message}");
-        }
+        _table.Add(obj);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
     
     public async Task UpdateAsync(T obj, CancellationToken cancellationToken)
