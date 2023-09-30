@@ -5,7 +5,7 @@ namespace Koggo.Client.Models.Home
 {
     public class ReservationModel : BaseControllerModel
     {
-        public List<ReservationInfo> ReservationInfos { get; set; } = null!;
+        public List<ReservationInfo>? ReservationInfos { get; set; } = null!;
         public UserType UserType { get; set; } 
 
     }

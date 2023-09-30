@@ -33,7 +33,7 @@ public class ReservationController : Controller
             !int.TryParse(tokenInfo.UserType, out int userType) || 
             tokenInfo.Username.IsNullOrEmpty())
         {
-            throw new Exception("invalid data");
+            return View(new ReservationModel());
         }
        
         var reservations = await _reservationService
