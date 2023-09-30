@@ -29,23 +29,23 @@ public class ReservationController : Controller
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         var tokenInfo = HttpExtensions.ReadJwtTokenInfo(HttpContext.Request);
-        if (!int.TryParse(tokenInfo.userId, out int userId) || 
-            !int.TryParse(tokenInfo.UserType, out int userType) || 
+        if (!int.TryParse(tokenInfo.userId, out int userId) ||
+            !int.TryParse(tokenInfo.UserType, out int userType) ||
             tokenInfo.Username.IsNullOrEmpty())
         {
-            throw new Exception("invalid data");
+            return View(new ReservationModel());
         }
-       
+
         var reservations = await _reservationService
             .GetReservationsAsync(tokenInfo.Username, userId, userType, cancellationToken);
-        
-        return View(new ReservationModel() {ReservationInfos = reservations ,UserType = UserType.Producer});
+
+        return View(new ReservationModel() { ReservationInfos = reservations, UserType = (UserType)userType });
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
-        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
 

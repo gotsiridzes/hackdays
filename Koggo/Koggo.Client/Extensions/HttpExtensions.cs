@@ -22,9 +22,13 @@ public static class HttpExtensions
         return request.Cookies["JwtToken"];
     }
 
-    public static (string Username, string userId, string UserType) ReadJwtTokenInfo(this HttpRequest request)
+    public static (string? Username, string? userId, string? UserType) ReadJwtTokenInfo(this HttpRequest request)
     {
         var token = request.Cookies["JwtToken"];
+        if (string.IsNullOrEmpty(token))
+        {
+            return (default, default, default);
+        }
         var securityToken = new JwtSecurityTokenHandler().ReadJwtToken(token);
 
         var userName = securityToken.Claims.FirstOrDefault(x => x.Type == CustomClaims.UserName)?.Value;
