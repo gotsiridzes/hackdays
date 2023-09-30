@@ -19,16 +19,14 @@
             <a href="#" data-content="reservations">Reservations</a>
         </li>
         <li class="auth-link">
-            <a href="#" id="login-link">Login</a>
+            <a id="login-link" asp-controller="Home" asp-action="Login">Login</a>
         </li>
         <li class="auth-link">
             <a id="register-link" asp-controller="Home" asp-action="Registration">Register</a>
         </li>
     </ul>
 </nav>
-<div id="container">
     @RenderBody()
-</div>
 <footer>
     <!-- Your footer content -->
 </footer>

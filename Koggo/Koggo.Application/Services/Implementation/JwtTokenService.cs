@@ -39,4 +39,10 @@ public class JwtTokenService : IJwtTokenService
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
     }
+
+    public void ValidateToken(string jwtToken)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+        tokenHandler.ValidateToken(jwtToken, new TokenValidationParameters(), out _);
+    }
 }

@@ -51,4 +51,25 @@ public class AccountService : IAccountService
 
         await _usersRepository.Add(user, cancellationToken).ConfigureAwait(false);
     }
+
+    public async Task<User> AddAccountAndReturnAsync(CreateUser request, CancellationToken cancellationToken)
+    {
+        var salt = HashHelper.GetSalt();
+        var passwordHash = HashHelper.HashPassword(request.Password, salt);
+
+        var user = new User
+        {
+            Username = request.Username,
+            Password = passwordHash,
+            Salt = salt,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Email = request.Email,
+            Phone = request.Phone,
+            Type = request.Type
+        };
+
+        await _usersRepository.Add(user, cancellationToken).ConfigureAwait(false);
+        return user;
+    }
 }
