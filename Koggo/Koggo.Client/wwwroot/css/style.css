@@ -561,3 +561,8 @@ button {
 .styled-select select option:hover {
     background: #f0f0f0;
 }
+
+.popup.success {
+    background-color: #4CAF50; /* Green background color */
+    color: white; /* White text color */
+}
