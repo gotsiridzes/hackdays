@@ -1,18 +1,36 @@
 @model Koggo.Client.Models.Home.AvailabilitiesModel
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Date and Time List</title>
-</head>
-<body>
-    <h1>Date and Time List</h1>
-
-    <ul>
-        @foreach (var dateTime in Model.Availabilities)
+<form method="post" asp-controller="Reservation" asp-action="Create">
+    <div id="checkout-container">
+        @foreach (var item in Model.SimpleServiceInfos)
         {
-            <li>@dateTime.ToString("yyyy-MM-dd HH:mm:ss")</li>
+            <div class="service-slot">
+                <h3>@item.ServiceName</h3>
+                <p>Description: @item.Description</p>
+                <p>Price: $@item.Price</p>
+            </div>
         }
-    </ul>
-</body>
-</html>
+        <input type="hidden" name="ServiceIds" value="@Model.SelectedUserServiceIds">
+        <div id="date-selection">
+            <label for="date-input">Select Date:</label>
+            <select id="date-input" onchange="updateSelectedDate()">
+                @foreach (var item in Model.Availabilities)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+            <input type="hidden" name="DateSelected" id="selectedDate" value="">
+        </div>
+        <div id="total-price">Total Price: $@Model.TotalPrice</div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function updateSelectedDate() {
+        var selectedDate = document.getElementById('date-input').value;
+        document.getElementById('selectedDate').value = selectedDate;
+    }
+    // Initialize the hidden input value on page load
+    updateSelectedDate();
+</script>

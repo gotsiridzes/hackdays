@@ -8,6 +8,7 @@ using Koggo.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace Koggo.Client.Controllers;
 
@@ -47,7 +48,29 @@ public class ReservationController : ControllerBase
     public async Task<IActionResult> Checkout(string userServiceIds)
     {
         var userServiceIdsSplitted = userServiceIds?.Split(',') ?? new string[0];
-        var userServices = context.UserServices.Where(x => userServiceIdsSplitted.Contains(x.ServiceId.ToString())).ToList();
+        var userServices = context.UserServices
+            .Include(x => x.Service)
+            .Include(x => x.User)
+            .Where(x => userServiceIdsSplitted.Contains(x.ServiceId.ToString())).ToList();
+        var viewModel = new AvailabilitiesModel()
+        {
+            SelectedUserServiceIds = userServiceIds,
+            SimpleServiceInfos = new List<SimpleServiceInfo>()
+        };
+
+        foreach (var item in userServices)
+        {
+            viewModel.SimpleServiceInfos.Add(new SimpleServiceInfo
+            {
+                ServiceName = item.Service.Name,
+                Description = item.Service.Description,
+                Price = item.Price,
+                PhoneNumber = item.User.Phone
+            });
+        }
+
+        viewModel.TotalPrice = userServices.Sum(x => x.Price);
+        
         var earliestAvailabilities = new List<DateTime>();
         int count = 0;
         var startTime = DateTime.Now;
@@ -74,20 +97,55 @@ public class ReservationController : ControllerBase
             }
             if (isOutsideBusinessHours)
             {
-                startTime.AddHours(2);
+                startTime = startTime.AddHours(2);
                 continue;
             }
             earliestAvailabilities.Add(startTime);
             count++;
             startTime = startTime.AddHours(2);
         }
-        return View("Checkout", new AvailabilitiesModel()
-        {
-            TokenIsValid = base.ValidateToken(),
-            Availabilities = earliestAvailabilities
-        });
+
+        earliestAvailabilities.Add(DateTime.Now);
+        viewModel.Availabilities = earliestAvailabilities;
+        viewModel.TokenIsValid = ValidateToken();
+        return View("Checkout", viewModel);
     }
 
+    public async Task<IActionResult> Create(CreateReservationModel request)
+    {
+        var reservations = new List<Reservation>();
+        var userServiceIdsSplitted = request.ServiceIds?.Split(',') ?? new string[0];
+        var userServices = context.UserServices
+            .Include(x => x.Service)
+            .Include(x => x.User)
+            .Where(x => userServiceIdsSplitted.Contains(x.ServiceId.ToString())).ToList();
+        var guid = Guid.NewGuid();
+        var data = Request.ReadJwtTokenInfo();
+        
+        foreach (var item in userServices)
+        {
+            reservations.Add(new Reservation
+            {
+                UserServiceId = item.Id,
+                StartDate = request.DateSelected,
+                EndDate = request.DateSelected.AddHours(2),
+                ReservationType = ReservationType.UserReserved,
+                ApprovalStatus = ApprovalStatus.NeedsPayment,
+                RequesterUserId = int.Parse(data.userId),
+                HandlerUserId = item.UserId,
+                CreationDate = DateTime.Now,
+                Location = null,
+                Comment = null,
+                TotalPrice = item.Price * 1.2M, // TODO required counting logic
+                CorrelationId = guid
+            });
+        }
+
+        context.Reservations.AddRange(reservations);
+        await context.SaveChangesAsync();
+        return RedirectToAction("Index", "Reservation");
+    }
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

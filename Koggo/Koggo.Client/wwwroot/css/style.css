@@ -650,3 +650,51 @@ th, td {
     align-items: center;
     justify-content: space-between;
 }
+
+#checkout-container {
+    max-width: 1200px;
+    margin: auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.service-slot {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.service-slot h3 {
+    margin: 0 0 10px 0;
+}
+
+#date-selection, #total-price {
+    margin-bottom: 20px;
+}
+
+#date-selection label {
+    margin-right: 10px;
+}
+
+#total-price {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+}
+#date-selection label {
+    display: block;
+    margin-bottom: 8px;
+}
+#date-selection select {
+    width: 200px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}

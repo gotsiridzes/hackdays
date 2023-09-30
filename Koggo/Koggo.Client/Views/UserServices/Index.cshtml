@@ -130,7 +130,7 @@ document.getElementById('checkout-button').addEventListener('click', function() 
     let cartItemsString = cartItems.join(',');
     
     // Construct the URL for the checkout page, including the cart item IDs as a query parameter
-    let checkoutUrl = 'https://localhost:7089/Reservation/Checkout?cartItemsRaw=' + cartItemsString;
+    let checkoutUrl = 'https://localhost:7089/Reservation/Checkout?userServiceIds=' + cartItemsString;
     
     // Redirect to the checkout page
     window.location.href = checkoutUrl;
