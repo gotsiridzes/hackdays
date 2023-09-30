@@ -23,8 +23,7 @@ public class AccountController : ControllerBase
     [HttpPost("Login")]
     public Task<string> LoginAsync([FromQuery] string username, [FromQuery] string pass, CancellationToken cancellationToken)
         => _service.LoginAsync(username, pass, cancellationToken);
-
-    [Authorize]
+    
     [HttpPost("AddUser")]
     public Task AddAccountAsync(CreateUser request, CancellationToken cancellationToken)
         => _service.AddAccountAsync(request, cancellationToken);
