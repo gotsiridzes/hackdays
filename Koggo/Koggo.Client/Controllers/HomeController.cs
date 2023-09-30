@@ -43,7 +43,8 @@ public class HomeController : ControllerBase
         if (!isValid)
             return View(model);
 
-        model.UserServices = await _usersServiceRepository.GetByPagesAsync(x => x.Price > 0, page, 10, cancellationToken);
+        model.UserServices = await _usersServiceRepository
+            .GetByPagesAsync(x => x.Price > 0, page, 10, cancellationToken);
 
         return View(model);
     }
@@ -55,7 +56,7 @@ public class HomeController : ControllerBase
 
     public IActionResult Registration()
     {
-        return View();
+        return View(new BaseControllerModel(){TokenIsValid = ValidateToken()});
     }
 
     [HttpPost("Registration")]
