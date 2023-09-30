@@ -31,11 +31,7 @@ public class HomeController : ControllerBase
         var isValid = ValidateToken();
         return View(new BaseControllerModel() {TokenIsValid = isValid});
     }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+    
 
     public IActionResult Registration()
     {
