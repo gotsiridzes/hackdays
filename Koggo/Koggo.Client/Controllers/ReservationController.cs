@@ -1,32 +1,30 @@
-using System.Diagnostics;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using Azure.Core.Pipeline;
-using Koggo.Application.Enums;
-using Koggo.Application.Models.Response;
 using Koggo.Application.Services.Interface;
 using Koggo.Client.Extensions;
-using Microsoft.AspNetCore.Mvc;
 using Koggo.Client.Models;
 using Koggo.Client.Models.Home;
 using Koggo.Domain.Models;
+using Koggo.Infrastructure;
 using Koggo.Infrastructure.Interfaces;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics;
 
 namespace Koggo.Client.Controllers;
 
-public class ReservationController : Controller
+public class ReservationController : ControllerBase
 {
     private readonly ILogger<ReservationController> _logger;
     private readonly IReservationService _reservationService;
     private readonly IUserServiceRepository _userServiceRepository;
-    
-    public ReservationController(ILogger<ReservationController> logger, IReservationService reservationService, IUserServiceRepository userServiceRepository)
+    private readonly KoggoDbContext context;
+
+    public ReservationController(IJwtTokenService jwtTokenService, ILogger<ReservationController> logger, IReservationService reservationService, IUserServiceRepository userServiceRepository, KoggoDbContext context)
+        : base(jwtTokenService)
     {
         _logger = logger;
         _reservationService = reservationService;
         _userServiceRepository = userServiceRepository;
+        this.context = context;
     }
 
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -46,36 +44,50 @@ public class ReservationController : Controller
     }
 
     [HttpGet("Reservation/Checkout")]
-    public async Task<IActionResult> Checkout(string[] cartItemsRaw)
+    public async Task<IActionResult> Checkout(string userServiceIds)
     {
-        var cartItems = cartItemsRaw[0].Split(',');
-        var idsCovnerted = new int[cartItems.Length];
-        for (var i = 0; i < cartItems.Length; i++)
+        var userServiceIdsSplitted = userServiceIds?.Split(',') ?? new string[0];
+        var userServices = context.UserServices.Where(x => userServiceIdsSplitted.Contains(x.ServiceId.ToString())).ToList();
+        var earliestAvailabilities = new List<DateTime>();
+        int count = 0;
+        var startTime = DateTime.Now;
+        while (count < 5 && startTime < DateTime.Now.AddDays(7))
         {
-            var converted = int.Parse(cartItems[i]);
-            idsCovnerted[i] = converted;
-        }
-
-        var data = await _userServiceRepository.GetUserServiceByIdsAndIncludes(idsCovnerted);
-
-        var viewData = new CheckoutModel() {ServiceInfos = new List<SimpleServiceInfo>()};
-        
-        foreach (var item in data)
-        {
-            viewData.ServiceInfos.Add(new SimpleServiceInfo
+            var hour = startTime.Hour;
+            var isOutsideBusinessHours = false;
+            foreach (var item in userServices)
             {
-                ServiceName = item.Service.Name,
-                Description = item.Service.Description,
-                Price = item.Price,
-                PhoneNumber = item.User.Phone
-            });
+                if (!(item.AvailableStartHour.Hour < hour && item.AvailableEndHour.Hour > hour))
+                {
+                    isOutsideBusinessHours = true;
+                    break;
+                }
+                var reservedTimes = context.Reservations.Where(a => a.HandlerUserId == item.User.Id).ToList();
+                foreach (var time in reservedTimes)
+                {
+                    if ((startTime >= time.StartDate && startTime <= time.EndDate) || (startTime.AddHours(2) >= time.StartDate && startTime.AddHours(2) <= time.EndDate))
+                    {
+                        isOutsideBusinessHours = true;
+                        break;
+                    }
+                }
+            }
+            if (isOutsideBusinessHours)
+            {
+                startTime.AddHours(2);
+                continue;
+            }
+            earliestAvailabilities.Add(startTime);
+            count++;
+            startTime = startTime.AddHours(2);
         }
-
-        viewData.TotalPrice = viewData.ServiceInfos.Sum(x => x.Price);
-        
-        return View(viewData);
+        return View("Checkout", new AvailabilitiesModel()
+        {
+            TokenIsValid = base.ValidateToken(),
+            Availabilities = earliestAvailabilities
+        });
     }
-    
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

@@ -1,16 +1,18 @@
-@model Koggo.Client.Models.Home.CheckoutModel
+@model Koggo.Client.Models.Home.AvailabilitiesModel
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Date and Time List</title>
+</head>
+<body>
+    <h1>Date and Time List</h1>
 
-<div id="checkout-container">
-    @foreach (var serviceInfo in Model.ServiceInfos)
-    {
-        <div class="service-slot">
-            <h3>@serviceInfo.ServiceName</h3>
-            <p>Description: @serviceInfo.Description</p>
-            <p>Price: $@serviceInfo.Price</p>
-            <p>Phone: (+995) @serviceInfo.PhoneNumber</p>
-        </div>
-    }
-
-    <div id="total-price">Total Price: $@Model.TotalPrice</div>
-</div>
+    <ul>
+        @foreach (var dateTime in Model.Availabilities)
+        {
+            <li>@dateTime.ToString("yyyy-MM-dd HH:mm:ss")</li>
+        }
+    </ul>
+</body>
+</html>

@@ -2,7 +2,6 @@ using Koggo.Application.Models;
 using Koggo.Application.Services.Interface;
 using Koggo.Client.Extensions;
 using Koggo.Client.Models.Home;
-using Koggo.Domain.Models;
 using Koggo.Infrastructure;
 using Koggo.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
