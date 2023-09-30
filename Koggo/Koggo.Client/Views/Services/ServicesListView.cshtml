@@ -1,39 +1,16 @@
-﻿<style>
-    /* Create a container to center the items */
-    .container {
-        justify-content: center;
-        align-items: flex-start; /* Align items to the top of each row */
-        height: 100vh; /* 100% viewport height to fill the entire page */
-    }
+﻿@model Koggo.Client.Models.Home.ServicesModel
 
-    /* Style the service items within the container */
-    .service-item {
-        flex: 0 0 calc(16.666% - 20px); /* 6 columns, subtracting margins */
-        border: 1px solid #ccc; /* Example border style */
-        margin: 10px; /* Add margin around each column */
-        box-sizing: border-box; /* Include margin in the width calculation */
-    }
-
-    /* Add other CSS styles for .service-image and .service-info as needed */
-    .service-image img {
-        max-width: 100%;
-        height: auto;
-    }
-</style>
-
-<div class="container">
-    <div id="service-list">
-        @foreach (var item in Model.Services)
-        {
-            <div class="service-item">
-                <div class="service-image">
-                    <img src="data:image/png;base64,@item.IconImage" alt="Service Image">
-                </div>
-                <div class="service-info">
-                    <h2 class="service-name">@item.Name</h2>
-                    <p class="service-description">@item.Description</p>
-                </div>
+<div id="service-list">
+    @foreach (var item in Model.Services)
+    {
+        <div class="service-item">
+            <div class="service-image">
+                <img src="data:image/png;base64,@item.IconImage" alt="Service Image"> <!-- Replace with your Base64Image -->
             </div>
-        }
-    </div>
+            <div class="service-info">
+                <h2 class="service-name">@item.Name</h2> <!-- Replace with your Name -->
+                <p class="service-description">@item.Description</p> <!-- Replace with your Description -->
+            </div>
+        </div>
+    }
 </div>
