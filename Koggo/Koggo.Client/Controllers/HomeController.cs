@@ -35,7 +35,7 @@ public class HomeController : ControllerBase
     public async Task<IActionResult> Services(int page, CancellationToken cancellationToken)
     {
         var isValid = ValidateToken();
-        var model = new ServicesModel
+        var model = new UserServicesModel
         {
             TokenIsValid = isValid
         };
