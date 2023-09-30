@@ -556,8 +556,9 @@ button:hover {
 .styled-select select option:hover {
     background: #f0f0f0;
 }
-
-/* Matched styles to existing CSS */
+.popup.success {
+    background-color: #4CAF50; /* Green background color */
+    color: white;
 
 .reservation {
     border: 1px solid #e0e0e0;
@@ -630,4 +631,11 @@ th, td {
     padding: 10px 20px;
     font-size: 20px;
     z-index: 100;
+}
+
+
+.service-name-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
