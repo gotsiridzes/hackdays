@@ -32,23 +32,6 @@ public class HomeController : ControllerBase
         return View(new BaseControllerModel() {TokenIsValid = isValid});
     }
 
-    public async Task<IActionResult> Services(int page, CancellationToken cancellationToken)
-    {
-        var isValid = ValidateToken();
-        var model = new UserServicesModel
-        {
-            TokenIsValid = isValid
-        };
-        
-        if (!isValid)
-            return View(model);
-
-        model.UserServices = await _usersServiceRepository
-            .GetByPagesAsync(x => x.Price > 0, page, 10, cancellationToken);
-
-        return View(model);
-    }
-
     public IActionResult Privacy()
     {
         return View();
@@ -66,7 +49,7 @@ public class HomeController : ControllerBase
 
         var token = _jwtTokenService.GetToken(user);
         Response.AddJwtToken(token);
-        return RedirectToAction("Services");
+        return RedirectToRoute("/UserServices");
     }
     
     [HttpGet("Login")]
@@ -87,7 +70,7 @@ public class HomeController : ControllerBase
     public IActionResult LogOut()
     {
         Response.RemoveJwtToken();
-        return RedirectToAction("Services");
+        return RedirectToRoute("/UserServices");
     }
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

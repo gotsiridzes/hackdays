@@ -23,6 +23,7 @@ builder.Services.AddScoped<IRepository<Service>, Repository<Service>>();
 builder.Services.AddScoped<IRepository<UserService>, Repository<UserService>>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
+builder.Services.AddScoped<IUserServiceRepository, UserServiceRepository>();
 
 builder.Services.AddDataProtection();
 
