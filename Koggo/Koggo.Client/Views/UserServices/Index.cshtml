@@ -75,12 +75,13 @@
                 <button id="prev-page" disabled>Previous</button>
                 <span id="page-num">1</span>
                 <button id="next-page">Next</button>
+                <button id="checkout-button">Checkout</button>
             </div>
         </div>
     </div>
 }
 <script>
-    var cartItems = [];
+    let cartItems = [];
   
       document.addEventListener('DOMContentLoaded', function() {
           var buttons = document.querySelectorAll('.cart-button');
@@ -88,6 +89,7 @@
   
           function updateCartCount() {
               cartCountElement.textContent = cartItems.length;
+              console.log(cartItems)
           }
   
           buttons.forEach(function(button) {
@@ -122,4 +124,15 @@ function closeModal() {
 			closeModal();
 		}
 	}
+   
+document.getElementById('checkout-button').addEventListener('click', function() {
+    // Convert the cartItems array to a comma-separated string
+    let cartItemsString = cartItems.join(',');
+    
+    // Construct the URL for the checkout page, including the cart item IDs as a query parameter
+    let checkoutUrl = 'https://localhost:7089/Reservation/Checkout?cartItemsRaw=' + cartItemsString;
+    
+    // Redirect to the checkout page
+    window.location.href = checkoutUrl;
+});
 </script>

@@ -1,0 +1,16 @@
+@model Koggo.Client.Models.Home.CheckoutModel
+
+
+<div id="checkout-container">
+    @foreach (var serviceInfo in Model.ServiceInfos)
+    {
+        <div class="service-slot">
+            <h3>@serviceInfo.ServiceName</h3>
+            <p>Description: @serviceInfo.Description</p>
+            <p>Price: $@serviceInfo.Price</p>
+            <p>Phone: (+995) @serviceInfo.PhoneNumber</p>
+        </div>
+    }
+
+    <div id="total-price">Total Price: $@Model.TotalPrice</div>
+</div>
