@@ -310,3 +310,40 @@ button:hover {
     font-size: 1em;
 }
 
+#service-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.service-item {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+.service-item:hover {
+    transform: translateY(-10px);
+}
+
+.service-image img {
+    width: 100%;
+    border-right: 1px solid #eee;
+}
+
+.service-info {
+    padding: 10px;
+}
+
+.service-name {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.service-description, .service-type {
+    margin-bottom: 5px;
+}
