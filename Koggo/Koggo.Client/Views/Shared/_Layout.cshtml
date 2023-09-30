@@ -10,13 +10,14 @@
 <nav>
     <ul>
         <li>
-            <a href="#" data-content="services" class="active">Services</a>
+            <a id="register-link" asp-controller="Home" asp-action="Index">Services</a>
         </li>
         <li>
             <a href="#" data-content="orders">Orders</a>
         </li>
         <li>
             <a href="#" data-content="reservations">Reservations</a>
+            <a id="register-link" asp-controller="Reservation" asp-action="Index">Services</a>
         </li>
         <li class="auth-link">
             <a id="login-link" asp-controller="Home" asp-action="Login">Login</a>

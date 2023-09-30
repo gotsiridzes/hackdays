@@ -22,6 +22,7 @@ builder.Services.AddScoped<IRepository<Reservation>, Repository<Reservation>>();
 builder.Services.AddScoped<IRepository<Service>, Repository<Service>>();
 builder.Services.AddScoped<IRepository<UserService>, Repository<UserService>>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
 
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(JwtOptions.OptionName));
 builder.Services.AddJwtAuth(builder.Configuration.GetSection(JwtOptions.OptionName).Get<JwtOptions>());
