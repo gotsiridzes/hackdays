@@ -1,17 +1,28 @@
-<div id="landing-page">
-    <div id="app-header">
-        <h1>Your App Name</h1>  <!-- Replace with your app name -->
-        <p>Your App Slogan</p>  <!-- Replace with your slogan -->
+﻿<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Application</title>
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <div id="landing-page">
+        <div id="app-header">
+            <h1>Koggo Rental</h1>
+            <p lang="ka">მაიტა მამახნეინე</p>
+        </div>
+        <div>
+            <p>გჭირდება ევაკუატორი, ამწე, სატვირთო ან ყველაფერი ერთად? - მოგვენდე და გაიმარტივე ცხოვრება</p>
+        </div>
+        <div id="cta-button">
+            <a class="cta-btn" asp-controller="UserServices" asp-action="Index">რა შემიძლია ვიქირაო?</a>
+        </div>
+        <div id="app-images">
+            <img src="~/images/cement.png" alt="Image 1" class="app-image" style="width: 400px; height: 300px;">
+            <img src="~/images/euacuator.png" alt="Image 2" class="app-image" style="width: 400px; height: 300px;">
+            <img src="~/images/tractor.png" alt="Image 3" class="app-image" style="width: 400px; height: 300px;">
+        </div>
     </div>
-    <div id="app-quote">
-        <q>A good quote that represents your app's ethos.</q> <!-- Replace with a quote -->
-    </div>
-    <div id="cta-button">
-        <a href="#service-list" class="cta-btn">Explore Services</a> <!-- Link to your service list or another relevant section -->
-    </div>
-    <div id="app-images">
-        <img src="https://th.bing.com/th/id/R.0335a26c9f2ba4a98954f81accef132c?rik=Otr9NYOT3s%2b6qQ&pid=ImgRaw&r=0" alt="Image 1" class="app-image">  <!-- Replace with your image paths -->
-        <img src="https://th.bing.com/th/id/OIP.xPELa85CMeIOGLWtZh3uvwHaEK?pid=ImgDet&rs=1" alt="Image 2" class="app-image">  <!-- Replace with your image paths -->
-        <!-- ...add more images as needed -->
-    </div>
-</div>
+</body>
+</html>
