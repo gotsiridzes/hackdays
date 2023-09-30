@@ -1,89 +1,95 @@
+@using Koggo.Domain.Ext
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model Koggo.Client.Models.Home.UserServicesModel
 @{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
 @if (Model.TokenIsValid)
 {
-    <div id="container">
-        <div id="filter-list">
-            <h2>Filters</h2>
+	<div id="container">
+		<div id="filter-list">
+			<h2>Filters</h2>
+			<form method="get" asp-action="Index" asp-controller="UserServices">
+				<!-- Price Range Filter -->
+				<div class="filter-section">
+					<h3>Price Range</h3>
+					<label for="MinPrice">Min Price</label>
+					<input type="number" id="MinPrice" name="MinPrice">
+					<label for="MaxPrice">Max Price</label>
+					<input type="number" id="MaxPrice" name="MaxPrice">
+				</div>
 
-            <!-- Price Range Filter -->
-            <div class="filter-section">
-                <h3>Price Range</h3>
-                <label for="min-price">Min Price</label>
-                <input type="number" id="min-price" name="min-price" value="0">
-                <label for="max-price">Max Price</label>
-                <input type="number" id="max-price" name="max-price" value="1000">
-            </div>
+				<!-- Categories Filter -->
+				<div class="filter-section">
+					<h3>Categories</h3>
+					<div class="styled-select">
+						<select for="Categories" id="Categories" name="Categories" multiple>
+							@foreach (var item in Model.ServiceTypes)
+							{
+								<option value="@item.ToGeo()">@item.ToGeo()</option>
+							}
+							<!-- Add more categories as needed -->
+						</select>
+					</div>
+					<button type="submit" asp-controller="UserServices" asp-action="Index" value="Search">Search</button>
+				</div>
+			</form>
+		</div>
 
-            <!-- Categories Filter -->
-            <div class="filter-section">
-                <h3>Categories</h3>
-                <input type="checkbox" id="category1" name="category1" value="Category1">
-                <label for="category1">Category 1</label><br>
-                <input type="checkbox" id="category2" name="category2" value="Category2">
-                <label for="category2">Category 2</label><br>
-                <input type="checkbox" id="category3" name="category3" value="Category3">
-                <label for="category3">Category 3</label><br>
-                <!-- ...add more categories as needed -->
-            </div>
-        </div>
+		<div id="content">
+			@foreach (var userService in Model.UserServices)
+			{
+				<div class="service-item">
+					<div class="service-image">
+						<img src="data:image/png;base64,@userService.ThumbNailPhoto" alt="Service Image">
+					</div>
+					<div class="service-info">
+						<h2 class="service-name">Name: @userService.Service.Name</h2>
+						<p class="service-description">Description: @userService.Service.Description</p>
+						<p class="service-price">Price: $@userService.Price</p>
+						<button id="reserve-button" class="see-more">Reserve</button>
+					</div>
+				</div>
+			}
 
-        <div id="content">
-            @foreach (var userService in Model.UserServices)
-            {
-                <div class="service-item">
-                    <div class="service-image">
-                        <img src="data:image/png;base64,@userService.ThumbNailPhoto" alt="Service Image">
-                    </div>
-                    <div class="service-info">
-                        <h2 class="service-name">Name: @userService.Service.Name</h2>
-                        <p class="service-description">Description: @userService.Service.Description</p>
-                        <p class="service-price">Price: $@userService.Price</p>
-                        <button id="reserve-button" class="see-more">Reserve</button>
-                    </div>
-                </div>
-            }
-            
-            <div id="reservation-modal" class="modal">
-                <div class="modal-content">
-                    <span class="close-button" onclick="closeModal()">&times;</span>
-                    <h2>Reserve a Service</h2>
-                    <!-- Reservation Form -->
-                    <form id="reservation-form">
-                        <label for="provider-name">Provider Name: </label>
-                        <input type="text" id="provider-name" name="provider-name" readonly value="test"><br>
-                        <label for="provider-phone">Phone: </label>
-                        <input type="text" id="provider-phone" name="provider-phone" readonly value="Provider Phone"><br>
-                        <!--... other form fields ...-->
-                        <input type="submit" value="Submit">
-                    </form>
-                </div>
-            </div>
-            
-            <div id="pagination-controls">
-                <button id="prev-page" disabled>Previous</button>
-                <span id="page-num">1</span>
-                <button id="next-page">Next</button>
-            </div>
-        </div>
-    </div>
+			<div id="reservation-modal" class="modal">
+				<div class="modal-content">
+					<span class="close-button" onclick="closeModal()">&times;</span>
+					<h2>Reserve a Service</h2>
+					<!-- Reservation Form -->
+					<form id="reservation-form">
+						<label for="provider-name">Provider Name: </label>
+						<input type="text" id="provider-name" name="provider-name" readonly value="test"><br>
+						<label for="provider-phone">Phone: </label>
+						<input type="text" id="provider-phone" name="provider-phone" readonly value="Provider Phone"><br>
+						<!--... other form fields ...-->
+						<input type="submit" value="Submit">
+					</form>
+				</div>
+			</div>
+
+			<div id="pagination-controls">
+				<button id="prev-page" disabled>Previous</button>
+				<span id="page-num">1</span>
+				<button id="next-page">Next</button>
+			</div>
+		</div>
+	</div>
 }
 <script>
-document.getElementById('reserve-button').onclick = function() {
-    document.getElementById('reservation-modal').style.display = "block";
-}
+	document.getElementById('reserve-button').onclick = function () {
+		document.getElementById('reservation-modal').style.display = "block";
+	}
 
-function closeModal() {
-    document.getElementById('reservation-modal').style.display = "none";
-}
+	function closeModal() {
+		document.getElementById('reservation-modal').style.display = "none";
+	}
 
-window.onclick = function(event) {
-    if (event.target == document.getElementById('reservation-modal')) {
-        closeModal();
-    }
-}
+	window.onclick = function (event) {
+		if (event.target == document.getElementById('reservation-modal')) {
+			closeModal();
+		}
+	}
 
 </script>
