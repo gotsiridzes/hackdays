@@ -21,6 +21,7 @@ public class JwtTokenService : IJwtTokenService
 
     public string GetToken(User user)
     {
+        
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_options.Value.Key);
         var tokenDescriptor = new SecurityTokenDescriptor
@@ -29,7 +30,7 @@ public class JwtTokenService : IJwtTokenService
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(CustomClaims.UserId,user.Id.ToString()),
-                new Claim(CustomClaims.UserId,user.Type.ToString())
+                new Claim(CustomClaims.UserType,((int)user.Type).ToString())
             }),
             Expires = DateTime.UtcNow.AddMinutes(_options.Value.ExpiryInMinutes),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
