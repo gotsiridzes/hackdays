@@ -1,4 +1,6 @@
 using Koggo.Application.Configuration;
+using Koggo.Application.Services.Implementation;
+using Koggo.Application.Services.Interface;
 using Koggo.Client.Extensions;
 using Koggo.Domain.Models;
 using Koggo.Infrastructure;
@@ -19,6 +21,7 @@ builder.Services.AddScoped<IRepository<User>, Repository<User>>();
 builder.Services.AddScoped<IRepository<Reservation>, Repository<Reservation>>();
 builder.Services.AddScoped<IRepository<Service>, Repository<Service>>();
 builder.Services.AddScoped<IRepository<UserService>, Repository<UserService>>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(JwtOptions.OptionName));
 builder.Services.AddJwtAuth(builder.Configuration.GetSection(JwtOptions.OptionName).Get<JwtOptions>());

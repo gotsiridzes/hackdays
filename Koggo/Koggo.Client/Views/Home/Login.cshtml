@@ -1,0 +1,21 @@
+<div id="container-login">
+    <div id="login-form-container">
+        <form id="login-form" method="post" asp-controller="Home" asp-action="Login">
+            <h2>Login</h2>
+            <!-- Username Field -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <!-- Password Field -->
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>

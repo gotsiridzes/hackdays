@@ -55,6 +55,16 @@ nav a.active {
     margin-bottom: 20px;
     flex: 3;
 }
+#content-base {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 .service-item {
     border: 1px solid #e0e0e0;
@@ -181,7 +191,7 @@ footer {
 /* ...existing styles... */
 
 #registration-form {
-    max-width: 500px;
+    max-width: 600px;
     margin: auto;
     padding: 20px;
     border: 1px solid #e0e0e0;
@@ -266,3 +276,37 @@ button:hover {
     border: 1px solid #e0e0e0;
     border-radius: 4px;
 }
+
+#container-login {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#login-form-container {
+    padding: 20px;
+}
+
+#login-form .form-group {
+    margin-bottom: 15px;
+}
+
+#login-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#login-form .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
