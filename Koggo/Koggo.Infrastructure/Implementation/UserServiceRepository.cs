@@ -65,4 +65,13 @@ public class UserServiceRepository : IUserServiceRepository
             .GetValues(typeof(ServiceType))
             .Cast<ServiceType>()
             .ToList();
+    
+	public Task<List<UserService>> GetUserServiceByIdsAndIncludes(int[] ids)
+	{
+		return _context.UserServices
+			.Include(x => x.Service)
+			.Include(x => x.User)
+			.Where(x => ids.Contains(x.Id))
+			.ToListAsync();
+	}
 }
