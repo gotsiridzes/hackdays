@@ -15,8 +15,7 @@ namespace Koggo.Client.Controllers
             this.context = context;
         }
 
-        // GET: ServicesController
-        public ActionResult Index()
+        public ActionResult Index(bool tf = false)
         {
             var data = context.Services.ToList();
             var model = new ServicesModel()

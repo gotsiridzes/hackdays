@@ -1,39 +1,11 @@
 ﻿@model Koggo.Client.Models.Home.ServicesModel
 
+<!DOCTYPE html>
+<html>
 <head>
+    <title>Create User Services</title>
     <style>
-
-        .overlay2 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1;
-        }
-
-        .popup2 {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        #closePopup2 {
-            margin-top: 10px;
-            padding: 5px 15px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
+        /* Add CSS styles for the popup container */
         .popup-container {
             display: none;
             position: fixed;
@@ -98,35 +70,22 @@
             input[type="submit"]:hover {
                 background-color: #005f5f;
             }
-
-        .inline-margin {
-            margin-left: 2%;
-            margin-top: 2%;
-        }
-
-        #openPopup {
-            background-color: green;
-            color: white; /* To ensure the text is readable */
-        }
-
-        #closePopup {
-            background-color: gray;
-            color: white; /* To ensure the text is readable */
-        }
-
     </style>
-
+</head>
+<body>
     <div>
-        <button id="openPopup" class="inline-margin">დამატება</button>
+        <h1>Create User Services</h1>
+        <!-- Add a button to trigger the popup -->
+        <button id="openPopup">Open Popup</button>
     </div>
 
     <!-- Create a popup container -->
     <div class="popup-container" id="popupContainer">
         <div class="popup-form">
-            <h1>დაამატე სერვისი</h1>
+            <h1>Create User Services</h1>
             <form method="post" asp-controller="UserServices" asp-action="Create" enctype="multipart/form-data" class="styled-form">
                 <div class="item">
-                    <label for="ServiceId">სერვისი:</label>
+                    <label for="ServiceId">Service ID:</label>
                     <select name="ServiceId" required class="styled-input">
                         @foreach (var service in Model.Services)
                         {
@@ -135,11 +94,12 @@
                     </select>
                 </div>
                 <div class="item">
-                    <label for="Price">საათობრივი ფასი:</label>
-                    <input type="number" name="Price" required class="styled-input">
+                    <label for="Price">Price:</label>
+                    <!-- Use type="text" for price input -->
+                    <input type="text" name="Price" id="priceInput" required class="styled-input">
                 </div>
                 <div class="item">
-                    <label for="ThumbNailPhoto">ფოტო:</label>
+                    <label for="ThumbNailPhoto">Thumbnail Photo:</label>
                     <input type="file" name="ThumbNailPhoto" id="thumbnailInput" accept="image/*" required class="styled-input">
                     <!-- Hidden input to store the Base64 data -->
                     <input type="hidden" name="ThumbNailPhotoBase64" id="thumbnailBase64" />
@@ -147,16 +107,16 @@
                     <img id="thumbnailPreview" src="" alt="Thumbnail Preview" style="max-width: 100px; display: none;">
                 </div>
                 <div class="item">
-                    <label for="AvailableStartHour">სამუშაო დღის დასაწყისი:</label>
+                    <label for="AvailableStartHour">Available Start Hour:</label>
                     <!-- Use type="time" for time input -->
                     <input type="time" name="AvailableStartHour" required class="styled-input">
                 </div>
                 <div class="item">
-                    <label for="AvailableEndHour">სამუშაო დღის დასასრული:</label>
+                    <label for="AvailableEndHour">Available End Hour:</label>
                     <!-- Use type="time" for time input -->
                     <input type="time" name="AvailableEndHour" required class="styled-input">
                 </div>
-                <input type="submit" value="დამატება" class="styled-submit">
+                <input type="submit" value="Create" class="styled-submit">
             </form>
 
             <style>
@@ -245,7 +205,7 @@
                     }
                 });
             </script>
-            <button id="closePopup" class="inline-margin">დახურვა</button>
+            <button id="closePopup">Close Popup</button>
         </div>
     </div>
 
@@ -263,31 +223,5 @@
             popupContainer.style.display = 'none';
         });
     </script>
-</head>
-<body style="height: 100%;">
-    @{
-        if (ViewBag.SuccessMessage != null)
-        {
-            <div class="overlay" id="popupOverlay">
-                <div class="popup" id="popup">
-                    <h2>ინფორმაცია წარმატებით შეინახა</h2>
-                    <button id="closePopup">დახურვა</button>
-                </div>
-            </div>
-        }
-    }
-    <div id="service-list">
-        @foreach (var item in Model.Services)
-        {
-            <div class="service-item">
-                <div class="service-image">
-                    <img src="data:image/png;base64,@item.IconImage" alt="Service Image"> <!-- Replace with your Base64Image -->
-                </div>
-                <div class="service-info">
-                    <h2 class="service-name">@item.Name</h2> <!-- Replace with your Name -->
-                    <p class="service-description">@item.Description</p> <!-- Replace with your Description -->
-                </div>
-            </div>
-        }
-    </div>
 </body>
+</html>
