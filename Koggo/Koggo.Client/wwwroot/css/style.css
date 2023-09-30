@@ -418,7 +418,7 @@ button:hover {
     from { opacity: 0; }
     to { opacity: 1; }
 }
-  /* Matched styles to existing CSS */
+      /* Matched styles to existing CSS */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -484,21 +484,27 @@ button:hover {
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             background-color: #ffffff;
-            display: flex;
-            flex-direction: column;
         }
 
-        .reservation h3 {
-            font-size: 1.25rem;
+        .service-name {
+            font-size: 1.5rem;
             font-weight: bold;
             color: #333;
             margin-bottom: 10px;
+            border-bottom: 2px solid #1b6ec2;
+            padding-bottom: 10px;
         }
 
-        .reservation p {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 10px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px; /* Added margin for spacing */
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
         }
 
         .action-buttons {

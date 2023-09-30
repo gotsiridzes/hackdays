@@ -3,10 +3,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Azure.Core.Pipeline;
 using Koggo.Application.Enums;
+using Koggo.Application.Models.Response;
 using Koggo.Application.Services.Interface;
 using Koggo.Client.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Koggo.Client.Models;
+using Koggo.Client.Models.Home;
+using Koggo.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 
@@ -36,7 +39,7 @@ public class ReservationController : Controller
         var reservations = await _reservationService
             .GetReservationsAsync(tokenInfo.Username, userId, userType, cancellationToken);
         
-        return View(reservations);
+        return View(new ReservationModel() {ReservationInfos = reservations ,UserType = UserType.Producer});
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
