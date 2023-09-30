@@ -509,3 +509,55 @@ button {
 .modal-content select option[disabled] {
     color: red;
 }
+
+
+/* Add this to your CSS stylesheet */
+
+/* Style for the dropdown */
+.styled-select select {
+    background: transparent;
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    appearance: none; /* Remove default arrow on Chrome/Safari */
+    -webkit-appearance: none; /* Remove default arrow on Chrome/Safari */
+    -moz-appearance: none; /* Remove default arrow on Firefox */
+    cursor: pointer;
+}
+
+.styled-select select:focus {
+    outline: none;
+    border-color: #007bff; /* Highlight the border on focus */
+}
+
+/* Style for the container */
+.styled-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Style for the dropdown arrow */
+.styled-select:after {
+    content: "\25BC"; /* Unicode character for down arrow */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    pointer-events: none; /* Prevent clicking on the arrow */
+}
+
+/* Style for the options */
+.styled-select select option {
+    background: #fff;
+    padding: 10px;
+}
+
+/* Hover effect for options */
+.styled-select select option:hover {
+    background: #f0f0f0;
+}
