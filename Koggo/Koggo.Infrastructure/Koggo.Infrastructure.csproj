@@ -21,4 +21,5 @@
       <ProjectReference Include="..\Koggo.Domain\Koggo.Domain.csproj" />
     </ItemGroup>
 
+
 </Project>

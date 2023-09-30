@@ -28,7 +28,7 @@ public class JwtTokenService : IJwtTokenService
         {
             Subject = new ClaimsIdentity(new Claim[]
             {
-                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(CustomClaims.UserName, user.Username),
                 new Claim(CustomClaims.UserId,user.Id.ToString()),
                 new Claim(CustomClaims.UserType,((int)user.Type).ToString())
             }),
