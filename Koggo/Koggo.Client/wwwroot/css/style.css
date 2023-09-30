@@ -55,6 +55,7 @@ nav a.active {
     margin-bottom: 20px;
     flex: 3;
 }
+
 #content-base {
     padding: 20px;
     margin: 0 auto;
@@ -84,6 +85,7 @@ nav a.active {
     display: block;
     margin-bottom: 10px;
 }
+
 .service-image img {
     max-width: 100px;
     max-height: 100px;
@@ -102,6 +104,7 @@ nav a.active {
     margin: 0 0 10px 0;
     color: #333;
 }
+
 .service-name {
     font-size: 1.25em;
     margin-bottom: 5px;
@@ -130,11 +133,11 @@ nav a.active {
 
 
 .auth-links {
-    margin-left: auto;  /* This will push login/register links to the right */
+    margin-left: auto; /* This will push login/register links to the right */
 }
 
 .auth-link + .auth-link {
-    margin-left: 20px;  /* This will create a 20px gap between the login and register links */
+    margin-left: 20px; /* This will create a 20px gap between the login and register links */
 }
 
 .auth-link a {
@@ -326,6 +329,7 @@ button:hover {
     overflow: hidden;
     transition: transform 0.3s;
 }
+
 .service-item:hover {
     transform: translateY(-10px);
 }
@@ -354,7 +358,7 @@ button:hover {
     background-color: #f9f9f9;
     border-bottom: 1px solid #eee;
     border-radius: 15px;
-    overflow: hidden;  /* Ensures border-radius applies to all content */
+    overflow: hidden; /* Ensures border-radius applies to all content */
     animation: fadeIn 1s ease-in-out;
 }
 
@@ -376,7 +380,7 @@ button:hover {
 
 #cta-button {
     margin-top: 30px;
-    margin-bottom: 30px;  /* Added margin for spacing before images */
+    margin-bottom: 30px; /* Added margin for spacing before images */
 }
 
 .cta-btn {
@@ -385,14 +389,14 @@ button:hover {
     font-size: 1em;
     border: none;
     border-radius: 5px;
-    background-color: #008CBA;  /* Change color to match your brand */
+    background-color: #008CBA; /* Change color to match your brand */
     color: #fff;
     text-decoration: none;
     transition: background-color 0.3s;
 }
 
 .cta-btn:hover {
-    background-color: #005f5f;  /* Darker shade for hover effect */
+    background-color: #005f5f; /* Darker shade for hover effect */
 }
 
 #app-images {
@@ -411,12 +415,16 @@ button:hover {
 }
 
 .app-image:hover {
-    transform: scale(1.05);  /* Slight zoom on hover */
+    transform: scale(1.05); /* Slight zoom on hover */
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* Modal Styles */
@@ -428,8 +436,8 @@ button:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
     padding-top: 60px;
 }
 
@@ -440,7 +448,7 @@ button:hover {
     border: 1px solid #888;
     width: 80%;
     border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .close-button {
@@ -456,6 +464,7 @@ button:hover {
     text-decoration: none;
     cursor: pointer;
 }
+
 .modal-content input,
 .modal-content select {
     width: 80%;
@@ -556,9 +565,11 @@ button:hover {
 .styled-select select option:hover {
     background: #f0f0f0;
 }
+
 .popup.success {
     background-color: #4CAF50; /* Green background color */
     color: white;
+}
 
 .reservation {
     border: 1px solid #e0e0e0;
@@ -624,7 +635,7 @@ th, td {
 
 .cart-count {
     position: fixed;
-    top: 60px;  /* Adjust this value based on the height of your navbar */
+    top: 60px; /* Adjust this value based on the height of your navbar */
     right: 10px;
     background-color: #FFD700;
     border-radius: 50%;
