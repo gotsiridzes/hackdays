@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Koggo.Client.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Koggo.Client.Controllers;
 
