@@ -8,6 +8,7 @@ public class Service : IBaseModel
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
     public ServiceType ServiceType { get; set; }
+    public ICollection<UserService> UserServices { get; set; }
 }
 
 public enum ServiceType

@@ -397,3 +397,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 .idea
+Koggo\Koggo.Client\appsettings.Development.json
+Koggo\Koggo.Client\appsettings.json

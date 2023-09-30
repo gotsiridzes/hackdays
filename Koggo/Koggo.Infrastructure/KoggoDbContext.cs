@@ -13,7 +13,35 @@ namespace Koggo.Infrastructure
     {
         public KoggoDbContext(DbContextOptions<KoggoDbContext> options) : base(options)
         {
-            
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Koggo.Domain.Models.UserService>(us =>
+            {
+                us.HasOne(x => x.User)
+                    .WithMany(p => p.UserServices)
+                    .HasForeignKey(f => f.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                us.HasMany(x => x.Reservations)
+                    .WithOne(p => p.UserService)
+                    .HasForeignKey(f => f.UserServiceId);
+
+                us.HasOne(x => x.Service)
+                    .WithMany(p => p.UserServices)
+                    .HasForeignKey(f => f.ServiceId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<Koggo.Domain.Models.User>(u =>
+            {
+                u.HasIndex(x => x.Username)
+                    .IsUnique(true);
+            });
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Reservation> Reservations { get; set; }
