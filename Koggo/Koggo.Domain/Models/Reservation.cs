@@ -7,6 +7,7 @@ public class Reservation : IBaseModel
 {
     public int Id { get; set; }
     public int UserServiceId { get; set; }
+    public UserService UserService { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public ReservationType ReservationType { get; set; }
