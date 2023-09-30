@@ -17,7 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Koggo.Application\Koggo.Application.csproj" />
+		<ProjectReference Include="..\Koggo.Application\Koggo.Application.csproj" />	
 		<ProjectReference Include="..\Koggo.Infrastructure\Koggo.Infrastructure.csproj" />
 	</ItemGroup>
 

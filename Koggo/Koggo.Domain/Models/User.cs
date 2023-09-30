@@ -13,6 +13,7 @@ public class User : IBaseModel
     public string Email { get; set; } = null!;
     public string Phone { get; set; } = null!;
     public UserType Type { get; set; }
+    public ICollection<UserService> UserServices { get; set; }
 }
 
 public enum UserType
