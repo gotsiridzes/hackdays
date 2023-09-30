@@ -5,52 +5,19 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
- @if (Model.ReservationInfos is not null)
- {
+@if (Model.ReservationInfos is not null)
+{
     <div id="content">
         <h1>Reservation List</h1>
-    
-       
-            @foreach (var reservation in Model.ReservationInfos)
-            {
-                <div class="reservation">
-                    <h3 class="service-name">   @reservation.ServiceName</h3>
-                    <table>
-                        <tr>
-                            <th>Reservation Type</th>
-                            <td>@reservation.ReservationType</td>
-                        </tr>
-                        <tr>
-                            <th>User</th>
-                            <td>@reservation.UserName</td>
-                        </tr>
-                        <tr>
-                            <th>Start Date</th>
-                            <td>@reservation.StartDate.ToString("MM/dd/yyyy HH:mm")</td>
-                        </tr>
-                        <tr>
-                            <th>Start Date</th>
-                            <td>@reservation.StartDate.ToString("MM/dd/yyyy HH:mm")</td>
-                        </tr>
-                        <tr>
-                            <th>Location</th>
-                            <td>@reservation.Location</td>
-                        </tr>
-                        <tr>
-                            <th>Status</th>
-                            <td>@reservation.ApprovalStatus</td>
-                        </tr>
-                        <tr>
-                            <th>Additional comments</th>
-                            <td>@reservation.Comment</td>
-                        </tr>
-                        <tr>
-                            <th>Total Price</th>
-                            <td>@reservation.TotalPrice.ToString("C")</td>
-                        </tr>
-                    </table>
 
-                    @if (Model.UserType == UserType.Producer)
+
+        @foreach (var reservation in Model.ReservationInfos)
+        {
+            <div class="reservation">
+                <div class="service-name-container">
+                    <h3 class="service-name"> @reservation.ServiceName</h3>
+                    @if (Model.UserType == UserType.Producer &&
+                         reservation.ApprovalStatus == ApprovalStatus.NeedsProducerApproval)
                     {
                         <div class="action-buttons">
                             <button class="accept-button">Accept</button>
@@ -58,10 +25,46 @@
                         </div>
                     }
                 </div>
-            }
-        </div>
+
+                <table>
+                    <tr>
+                        <th>Reservation Type</th>
+                        <td>@reservation.ReservationType</td>
+                    </tr>
+                    <tr>
+                        <th>User</th>
+                        <td>@reservation.UserName</td>
+                    </tr>
+                    <tr>
+                        <th>Start Date</th>
+                        <td>@reservation.StartDate.ToString("MM/dd/yyyy HH:mm")</td>
+                    </tr>
+                    <tr>
+                        <th>Start Date</th>
+                        <td>@reservation.StartDate.ToString("MM/dd/yyyy HH:mm")</td>
+                    </tr>
+                    <tr>
+                        <th>Location</th>
+                        <td>@reservation.Location</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>@reservation.ApprovalStatus</td>
+                    </tr>
+                    <tr>
+                        <th>Additional comments</th>
+                        <td>@reservation.Comment</td>
+                    </tr>
+                    <tr>
+                        <th>Total Price</th>
+                        <td>@reservation.TotalPrice.ToString("C")</td>
+                    </tr>
+                </table>
+            </div>
         }
- else
- {
-     <h3>დავალებები არ მოიძებნა</h3>
- }
+    </div>
+}
+else
+{
+    <h3>დავალებები არ მოიძებნა</h3>
+}
