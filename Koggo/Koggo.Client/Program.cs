@@ -10,10 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+var configuration = builder.Configuration;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<KoggoDbContext>(
-       options => options.UseSqlServer("Server=L_STURASHVILI;Database=Koggo;Trusted_Connection=True;MultipleActiveResultSets=true; TrustServerCertificate=True"));
+       options => options.UseSqlServer(configuration.GetConnectionString("Default")));
 
 builder.Services.AddScoped<IRepository<User>, Repository<User>>();
 builder.Services.AddScoped<IRepository<Reservation>, Repository<Reservation>>();
