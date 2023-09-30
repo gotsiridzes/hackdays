@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model BaseControllerModel
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,21 +11,29 @@
 <nav>
     <ul>
         <li>
-            <a id="register-link" asp-controller="Home" asp-action="Index">Services</a>
+            <a data-content="services" class="active" asp-controller="Home" asp-action="Services">Services</a>
         </li>
         <li>
             <a href="#" data-content="orders">Orders</a>
         </li>
         <li>
             <a href="#" data-content="reservations">Reservations</a>
-            <a id="register-link" asp-controller="Reservation" asp-action="Index">Services</a>
         </li>
-        <li class="auth-link">
-            <a id="login-link" asp-controller="Home" asp-action="Login">Login</a>
-        </li>
-        <li class="auth-link">
-            <a id="register-link" asp-controller="Home" asp-action="Registration">Register</a>
-        </li>
+        @if (Model.TokenIsValid)
+        {
+            <li class="auth-link">
+                <a id="login-link" asp-controller="Home" asp-action="LogOut">LogOut</a>
+            </li>
+        }
+        else
+        {
+            <li class="auth-link">
+                <a id="login-link" asp-controller="Home" asp-action="Login">Login</a>
+            </li>
+            <li class="auth-link">
+                <a id="register-link" asp-controller="Home" asp-action="Registration">Register</a>
+            </li>
+        }
     </ul>
 </nav>
     @RenderBody()
