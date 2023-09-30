@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Application</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="~/css/style.css">
 </head>
 <body>
 <nav>
@@ -22,11 +22,11 @@
             <a href="#" id="login-link">Login</a>
         </li>
         <li class="auth-link">
-            <a href="#" id="register-link">Register</a>
+            <a id="register-link" asp-controller="Home" asp-action="Registration">Register</a>
         </li>
     </ul>
 </nav>
-<div id="content">
+<div id="container">
     @RenderBody()
 </div>
 <footer>
