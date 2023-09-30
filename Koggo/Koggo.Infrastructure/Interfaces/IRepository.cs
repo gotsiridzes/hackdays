@@ -18,6 +18,7 @@ public interface IRepository<T> where  T : class, IBaseModel
         CancellationToken cancellationToken = default);
     Task<List<T>> GetByPagesAsync(Expression<Func<T, bool>>? filter, int page, int count, CancellationToken cancellationToken, params string[] includeProperties);
     Task AddAsync(T obj, CancellationToken cancellationToken);
+    Task Add(T obj, CancellationToken cancellationToken);
     Task UpdateAsync(T obj, CancellationToken cancellationToken);
     Task DeleteAsync(int id, CancellationToken cancellationToken);
 }

@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Koggo.Domain\Koggo.Domain.csproj" />
+      <ProjectReference Include="..\Koggo.Infrastructure\Koggo.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
