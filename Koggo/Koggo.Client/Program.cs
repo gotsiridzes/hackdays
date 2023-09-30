@@ -1,7 +1,27 @@
+using Koggo.Application.Configuration;
+using Koggo.Client.Extensions;
+using Koggo.Domain.Models;
+using Koggo.Infrastructure;
+using Koggo.Infrastructure.Implementation;
+using Koggo.Infrastructure.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddDbContext<KoggoDbContext>(
+       options => options.UseSqlServer("Server=L_STURASHVILI;Database=Koggo;Trusted_Connection=True;MultipleActiveResultSets=true; TrustServerCertificate=True"));
+
+builder.Services.AddScoped<IRepository<User>, Repository<User>>();
+builder.Services.AddScoped<IRepository<Reservation>, Repository<Reservation>>();
+builder.Services.AddScoped<IRepository<Service>, Repository<Service>>();
+builder.Services.AddScoped<IRepository<UserService>, Repository<UserService>>();
+
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(JwtOptions.OptionName));
+builder.Services.AddJwtAuth(builder.Configuration.GetSection(JwtOptions.OptionName).Get<JwtOptions>());
 
 var app = builder.Build();
 
