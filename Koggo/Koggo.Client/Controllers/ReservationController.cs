@@ -23,7 +23,7 @@ public class ReservationController : Controller
         _reservationService = reservationService;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         var tokenInfo = HttpExtensions.ReadJwtTokenInfo(HttpContext.Request);
         if (!int.TryParse(tokenInfo.userId, out int userId) || 
@@ -34,7 +34,7 @@ public class ReservationController : Controller
         }
        
         var reservations = await _reservationService
-            .GetReservationsAsync(tokenInfo.Username, userId, userType);
+            .GetReservationsAsync(tokenInfo.Username, userId, userType, cancellationToken);
         
         return View(reservations);
     }

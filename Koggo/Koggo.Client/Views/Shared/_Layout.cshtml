@@ -11,13 +11,16 @@
 <nav>
     <ul>
         <li>
-            <a data-content="services" class="active" asp-controller="Services" asp-action="Index">Services</a>
+            <a data-content="services" asp-controller="UserServices" asp-action="Index">Rent It</a>
+        </li>
+        <li>
+            <a data-content="services" asp-controller="Services" asp-action="Index">Services</a>
         </li>
         <li>
             <a href="#" data-content="orders">Orders</a>
         </li>
         <li>
-            <a href="#" data-content="reservations">Reservations</a>
+            <a data-content="Reservations" class="active" asp-controller="Reservation" asp-action="Index">Reservations</a>
         </li>
         @if (Model.TokenIsValid)
         {
@@ -36,10 +39,31 @@
         }
     </ul>
 </nav>
-    @RenderBody()
+@RenderBody()
 <footer>
     <!-- Your footer content -->
 </footer>
 <script src="script.js"></script>
+<script>
+// Get all the <a> tags within the <nav> element
+var navLinks = document.querySelectorAll('nav a');
+
+// Function to add the 'active' class on mouseenter
+function addActiveClass() {
+    this.classList.add('active');
+}
+
+// Function to remove the 'active' class on mouseleave
+function removeActiveClass() {
+    this.classList.remove('active');
+}
+
+// Loop through each <a> tag and add event listeners for mouseenter and mouseleave
+navLinks.forEach(function(link) {
+    link.addEventListener('mouseenter', addActiveClass);
+    link.addEventListener('mouseleave', removeActiveClass);
+});
+
+</script>
 </body>
 </html>
