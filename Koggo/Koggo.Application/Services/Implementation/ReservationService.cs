@@ -29,7 +29,6 @@ public class ReservationService : IReservationService
         foreach (var reservation in reservationInfos)
         {
             reservation.UserName = username;
-            reservation.UserType = (UserType)userType;
         }
 
         return reservationInfos;

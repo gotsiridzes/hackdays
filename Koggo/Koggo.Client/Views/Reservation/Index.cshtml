@@ -1,8 +1,30 @@
-@model List<Koggo.Application.Models.Response.ReservationInfo>
+@using Koggo.Domain.Models
+@model Koggo.Client.Models.Home.ReservationModel
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
-<h2>title</h2>
+<div class="container">
+        @foreach (var reservation in Model.ReservationInfos)
+        {
+            <div class="reservation">
+                <h3>@reservation.ServiceName</h3>
+                <br>
+                <p><strong>Reservation Type:</strong> @reservation.ReservationType</p>
+                <p><strong>User:</strong> @reservation.UserName</p>
+                <p><strong>Start Date:</strong> @reservation.StartDate.ToString("MM/dd/yyyy HH:mm")</p>
+                <p><strong>End Date:</strong> @reservation.EndDate.ToString("MM/dd/yyyy HH:mm")</p>
+                <p><strong>Total Price:</strong> @reservation.TotalPrice.ToString("C")</p>
+
+                @if (Model.UserType == UserType.Producer)
+                {
+                    <div class="action-buttons">
+                        <button class="accept-button">Accept</button>
+                        <button class="reject-button">Reject</button>
+                    </div>
+                }
+            </div>
+        }
+    </div>
