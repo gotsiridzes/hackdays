@@ -40,9 +40,37 @@ public class JwtTokenService : IJwtTokenService
         return tokenHandler.WriteToken(token);
     }
 
-    public void ValidateToken(string jwtToken)
+    public bool ValidateToken(string? jwtToken)
     {
+        if (string.IsNullOrWhiteSpace(jwtToken))
+        {
+            return false;
+        }
+        
+        var key = Encoding.ASCII.GetBytes(_options.Value.Key);
+
         var tokenHandler = new JwtSecurityTokenHandler();
-        tokenHandler.ValidateToken(jwtToken, new TokenValidationParameters(), out _);
+        var validationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = true,
+            ValidIssuer = _options.Value.Issuer,
+            ValidateAudience = true,
+            ValidAudience = _options.Value.Audience,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromHours(1) // Optional: adjust the allowed clock skew if necessary
+        };
+
+        try
+        {
+            tokenHandler.ValidateToken(jwtToken, validationParameters, out _);
+            return true;
+        }
+        catch
+        {
+            // Token validation failed
+            return false;
+        }
     }
 }

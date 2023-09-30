@@ -7,6 +7,11 @@ public static class HttpExtensions
         response.Cookies.Append("JwtToken", token);
     }
 
+    public static void RemoveJwtToken(this HttpResponse response)
+    {
+        response.Cookies.Delete("JwtToken");
+    }
+
     public static string? GetJwtToken(this HttpRequest request)
     {
         return request.Cookies["JwtToken"];

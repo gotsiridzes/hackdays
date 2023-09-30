@@ -4,17 +4,18 @@ using Koggo.Application.Services.Interface;
 using Koggo.Client.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Koggo.Client.Models;
+using Koggo.Client.Models.Home;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Koggo.Client.Controllers;
 
-public class HomeController : Controller
+public class HomeController : ControllerBase
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IAccountService _accountService;
     private readonly IJwtTokenService _jwtTokenService;
     
-    public HomeController(ILogger<HomeController> logger, IAccountService accountService, IJwtTokenService jwtTokenService)
+    public HomeController(ILogger<HomeController> logger, IAccountService accountService, IJwtTokenService jwtTokenService) : base(jwtTokenService)
     {
         _logger = logger;
         _accountService = accountService;
@@ -23,7 +24,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var isValid = ValidateToken();
+        return View(new IndexModel() {TokenIsValid = isValid});
     }
 
     public IActionResult Privacy()
@@ -49,7 +51,8 @@ public class HomeController : Controller
     [HttpGet("Login")]
     public IActionResult Login()
     {
-        return View();
+        var isValid = ValidateToken();
+        return View(new BaseControllerModel() {TokenIsValid = isValid});
     }
     
     [HttpPost("Login")]
@@ -57,6 +60,12 @@ public class HomeController : Controller
     {
         var token = await _accountService.LoginAsync(username, password, cancellationToken);
         Response.AddJwtToken(token);
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult LogOut()
+    {
+        Response.RemoveJwtToken();
         return RedirectToAction("Index");
     }
     
