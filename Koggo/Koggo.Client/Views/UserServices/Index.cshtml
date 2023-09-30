@@ -1,0 +1,44 @@
+﻿@model Koggo.Client.Models.Home.UserServicesCreateModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create User Services</title>
+</head>
+<body>
+    <h1>Create User Services</h1>
+
+    @using (Html.BeginForm("Create", "UserService", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <table>
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Service ID</th>
+                    <th>Price</th>
+                    <th>Thumbnail Photo</th>
+                    <th>Available Start Hour</th>
+                    <th>Available End Hour</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.UserServices.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.HiddenFor(model => model.UserServices[i].UserId) @Model.UserServices[i].UserId</td>
+                        <td>@Html.HiddenFor(model => model.UserServices[i].ServiceId) @Model.UserServices[i].ServiceId</td>
+                        <td>@Html.EditorFor(model => model.UserServices[i].Price)</td>
+                        <td>@Html.EditorFor(model => model.UserServices[i].ThumbNailPhoto)</td>
+                        <td>@Html.EditorFor(model => model.UserServices[i].AvailableStartHour, "{0:HH:mm:ss}")</td>
+                        <td>@Html.EditorFor(model => model.UserServices[i].AvailableEndHour, "{0:HH:mm:ss}")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <input type="submit" value="Create" />
+    }
+</body>
+</html>
