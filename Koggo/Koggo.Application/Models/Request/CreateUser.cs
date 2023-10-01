@@ -10,5 +10,5 @@ public class CreateUser
     public string LastName { get; set; } = null!;
     public string Email { get; set; } = null!;
     public string Phone { get; set; } = null!;
-    public UserType Type { get; set; }
+    public string Type { get; set; }
 }

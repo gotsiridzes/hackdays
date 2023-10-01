@@ -37,6 +37,7 @@ public class AccountService : IAccountService
         var salt = HashHelper.GetSalt();
         var passwordHash = HashHelper.HashPassword(request.Password, salt);
 
+        var type = Enum.Parse<UserType>(request.Type);
         var user = new User
         {
             Username = request.Username,
@@ -46,7 +47,7 @@ public class AccountService : IAccountService
             LastName = request.LastName,
             Email = request.Email,
             Phone = request.Phone,
-            Type = request.Type
+            Type = type
         };
 
         await _usersRepository.Add(user, cancellationToken).ConfigureAwait(false);
@@ -56,7 +57,7 @@ public class AccountService : IAccountService
     {
         var salt = HashHelper.GetSalt();
         var passwordHash = HashHelper.HashPassword(request.Password, salt);
-
+        var type = Enum.Parse<UserType>(request.Type);
         var user = new User
         {
             Username = request.Username,
@@ -66,7 +67,7 @@ public class AccountService : IAccountService
             LastName = request.LastName,
             Email = request.Email,
             Phone = request.Phone,
-            Type = request.Type
+            Type = type
         };
 
         await _usersRepository.Add(user, cancellationToken).ConfigureAwait(false);

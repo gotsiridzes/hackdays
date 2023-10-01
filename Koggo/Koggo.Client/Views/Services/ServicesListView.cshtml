@@ -115,18 +115,20 @@
         }
 
     </style>
-
-    <div>
-        <button id="openPopup" class="inline-margin">დამატება</button>
-    </div>
-
+    @if (Model.CanCreate)
+    {
+        <div>
+            <button id="openPopup" class="inline-margin">Create</button>
+        </div>
+    }
+    
     <!-- Create a popup container -->
     <div class="popup-container" id="popupContainer">
         <div class="popup-form">
-            <h1>დაამატე სერვისი</h1>
+            <h1>Add Service</h1>
             <form method="post" asp-controller="UserServices" asp-action="Create" enctype="multipart/form-data" class="styled-form">
                 <div class="item">
-                    <label for="ServiceId">სერვისი:</label>
+                    <label for="ServiceId">Service:</label>
                     <select name="ServiceId" required class="styled-input">
                         @foreach (var service in Model.Services)
                         {
@@ -135,11 +137,11 @@
                     </select>
                 </div>
                 <div class="item">
-                    <label for="Price">საათობრივი ფასი:</label>
+                    <label for="Price">Hourly Rate:</label>
                     <input type="number" name="Price" required class="styled-input">
                 </div>
                 <div class="item">
-                    <label for="ThumbNailPhoto">ფოტო:</label>
+                    <label for="ThumbNailPhoto">Photo:</label>
                     <input type="file" name="ThumbNailPhoto" id="thumbnailInput" accept="image/*" required class="styled-input">
                     <!-- Hidden input to store the Base64 data -->
                     <input type="hidden" name="ThumbNailPhotoBase64" id="thumbnailBase64" />
@@ -147,16 +149,16 @@
                     <img id="thumbnailPreview" src="" alt="Thumbnail Preview" style="max-width: 100px; display: none;">
                 </div>
                 <div class="item">
-                    <label for="AvailableStartHour">სამუშაო დღის დასაწყისი:</label>
+                    <label for="AvailableStartHour">Start Of The Working Hours:</label>
                     <!-- Use type="time" for time input -->
                     <input type="time" name="AvailableStartHour" required class="styled-input">
                 </div>
                 <div class="item">
-                    <label for="AvailableEndHour">სამუშაო დღის დასასრული:</label>
+                    <label for="AvailableEndHour">End Of The Working Hours:</label>
                     <!-- Use type="time" for time input -->
                     <input type="time" name="AvailableEndHour" required class="styled-input">
                 </div>
-                <input type="submit" value="დამატება" class="styled-submit">
+                <input type="submit" value="Create" class="styled-submit">
             </form>
 
             <style>
@@ -245,7 +247,7 @@
                     }
                 });
             </script>
-            <button id="closePopup" class="inline-margin">დახურვა</button>
+            <button id="closePopup" class="inline-margin">Close</button>
         </div>
     </div>
 

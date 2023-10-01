@@ -29,12 +29,21 @@
             <div class="form-group">
                 <label for="user-type">User Type</label>
                 <select id="user-type" name="user-type" required>
-                    <option value="provider">Service Provider</option>
-                    <option value="consumer">Service Consumer</option>
+                    <option value="Producer">Service Provider</option>
+                    <option value="Consumer">Service Consumer</option>
                 </select>
+                <input type="hidden" name="Type" id="user-type-val" value="">
             </div>
             <button type="submit">Submit</button>
         </form>
     </div>
 </div>
 
+<script type="text/javascript">
+    function updateSelectedDate() {
+        var selectedType = document.getElementById('user-type').value;
+        document.getElementById('user-type-val').value = selectedType;
+    }
+    // Initialize the hidden input value on page load
+    updateSelectedDate();
+</script>
