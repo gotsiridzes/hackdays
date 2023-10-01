@@ -27,7 +27,7 @@ public class CustomRepository : ICustomRepository
             var reservationInfo = await _context.Reservations
                 .Include(x => x.UserService)
                 .ThenInclude(x => x.Service)
-                .Where(res => res.UserService.UserId == userId)
+                .Where(res => res.RequesterUserId == userId)
                 .Select(info => new ReservationInfo
                     {
                         Id = info.Id,

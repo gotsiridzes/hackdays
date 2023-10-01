@@ -19,7 +19,8 @@ public class ReservationController : ControllerBase
     private readonly IUserServiceRepository _userServiceRepository;
     private readonly KoggoDbContext context;
 
-    public ReservationController(IJwtTokenService jwtTokenService, ILogger<ReservationController> logger, IReservationService reservationService, IUserServiceRepository userServiceRepository, KoggoDbContext context)
+    public ReservationController(IJwtTokenService jwtTokenService, ILogger<ReservationController> logger,
+        IReservationService reservationService, IUserServiceRepository userServiceRepository, KoggoDbContext context)
         : base(jwtTokenService)
     {
         _logger = logger;
@@ -41,7 +42,12 @@ public class ReservationController : ControllerBase
         var reservations = await _reservationService
             .GetReservationsAsync(tokenInfo.Username, userId, userType, cancellationToken);
 
-        return View(new ReservationModel() { ReservationInfos = reservations, UserType = (UserType)userType });
+        return View(new ReservationModel()
+        {
+            TokenIsValid = ValidateToken(),
+            ReservationInfos = reservations, 
+            UserType = (UserType) userType
+        });
     }
 
     [HttpGet("Reservation/Checkout")]
@@ -70,7 +76,7 @@ public class ReservationController : ControllerBase
         }
 
         viewModel.TotalPrice = userServices.Sum(x => x.Price);
-        
+
         var earliestAvailabilities = new List<DateTime>();
         int count = 0;
         var startTime = DateTime.Now;
@@ -85,21 +91,25 @@ public class ReservationController : ControllerBase
                     isOutsideBusinessHours = true;
                     break;
                 }
+
                 var reservedTimes = context.Reservations.Where(a => a.HandlerUserId == item.User.Id).ToList();
                 foreach (var time in reservedTimes)
                 {
-                    if ((startTime >= time.StartDate && startTime <= time.EndDate) || (startTime.AddHours(2) >= time.StartDate && startTime.AddHours(2) <= time.EndDate))
+                    if ((startTime >= time.StartDate && startTime <= time.EndDate) ||
+                        (startTime.AddHours(2) >= time.StartDate && startTime.AddHours(2) <= time.EndDate))
                     {
                         isOutsideBusinessHours = true;
                         break;
                     }
                 }
             }
+
             if (isOutsideBusinessHours)
             {
                 startTime = startTime.AddHours(2);
                 continue;
             }
+
             earliestAvailabilities.Add(startTime);
             count++;
             startTime = startTime.AddHours(2);
@@ -121,7 +131,7 @@ public class ReservationController : ControllerBase
             .Where(x => userServiceIdsSplitted.Contains(x.ServiceId.ToString())).ToList();
         var guid = Guid.NewGuid();
         var data = Request.ReadJwtTokenInfo();
-        
+
         foreach (var item in userServices)
         {
             reservations.Add(new Reservation
@@ -145,11 +155,10 @@ public class ReservationController : ControllerBase
         await context.SaveChangesAsync();
         return RedirectToAction("Index", "Reservation");
     }
-    
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
     }
 }
-
