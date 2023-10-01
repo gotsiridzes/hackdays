@@ -64,7 +64,7 @@ public class UserServicesController : ControllerBase
             UserId = int.Parse(userInfo.userId),
             ServiceId = userService.ServiceId,
             Price = userService.Price,
-            ThumbNailPhoto = userService.ThumbNailPhoto,
+            ThumbNailPhoto = userService.ThumbNailPhotoBase64,
             AvailableStartHour = userService.AvailableStartHour,
             AvailableEndHour = userService.AvailableEndHour,
         });

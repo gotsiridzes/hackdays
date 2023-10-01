@@ -10,7 +10,7 @@
         public int UserId { get; set; }
         public int ServiceId { get; set; }
         public decimal Price { get; set; }
-        public string? ThumbNailPhoto { get; set; }
+        public string? ThumbNailPhotoBase64 { get; set; }
         public DateTime AvailableStartHour { get; set; }
         public DateTime AvailableEndHour { get; set; }
     }
