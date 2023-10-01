@@ -30,19 +30,24 @@
     <nav>
         <ul>
             <li>
-                <a data-content="services" asp-controller="Home" asp-action="Index">მთავარი</a>
+                @* <a data-content="services" asp-controller="Home" asp-action="Index">მთავარი</a> *@
+                <a data-content="services" asp-controller="Home" asp-action="Index">Home</a>
             </li>
             <li>
-                <a data-content="services" asp-controller="UserServices" asp-action="Create">სერვისის დამატება</a>
+                @* <a data-content="services" asp-controller="UserServices" asp-action="Create">სერვისის დამატება</a> *@
+                <a data-content="services" asp-controller="UserServices" asp-action="Create">Add service</a>
             </li>
             <li>
-                <a data-content="services" asp-controller="UserServices" asp-action="Index">იქირავე</a>
+                @* <a data-content="services" asp-controller="UserServices" asp-action="Index">იქირავე</a> *@
+                <a data-content="services" asp-controller="UserServices" asp-action="Index">Rent</a>
             </li>
             <li>
-                <a data-content="services" asp-controller="Services" asp-action="Index">სერვისები</a>
+                @* <a data-content="services" asp-controller="Services" asp-action="Index">სერვისები</a> *@
+                <a data-content="services" asp-controller="Services" asp-action="Index">Services</a>
             </li>
             <li>
-                <a data-content="Reservations" class="active" asp-controller="Reservation" asp-action="Index">დავალებები</a>
+                @* <a data-content="Reservations" class="active" asp-controller="Reservation" asp-action="Index">დავალებები</a> *@
+                <a data-content="Reservations" class="active" asp-controller="Reservation" asp-action="Index">Reservations</a>
             </li>
             @if (Model.TokenIsValid)
             {
